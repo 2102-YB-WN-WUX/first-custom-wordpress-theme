@@ -18,3 +18,4 @@ Installing Wordpress in Vagrant (if using XAMPP/MAMP, replace the http://192.168
 
 Success! You should see all the Wordpress data populated in your database now. Login with your user/password you just set up.
 
+To use the theme, put all the files in this repo into a folder, i.e. "custom-theme" within the "themes" folder in wp-content.
