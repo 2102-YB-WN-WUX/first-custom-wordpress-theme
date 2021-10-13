@@ -38,4 +38,23 @@ function create_fruit_posttype() {
 
 add_action('init','create_fruit_posttype');
 
+// creating our new custom post type
+function create_sports_posttype() {
+  // set up the arguments
+  $args = array(
+    'labels' => array(
+      //name of the post type
+      'name' => 'Sports',
+      'singular_name' => 'Sport'
+    ),
+    'public' => true,
+    'menu_icon' => 'dashicons-carrot',
+    'supports' => array('title', 'editor', 'thumbnail')
+  );
+  // Within our function, we need to register the post type
+  register_post_type('sports', $args);
+}
+
+add_action('init','create_sports_posttype');
+
 ?>

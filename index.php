@@ -17,7 +17,7 @@
                          <?php the_title() ?>
                          </a>
                        </h5>
-                       <p>Posted: <?php the_date('F j, Y'); ?></p>
+                       <p>Posted: <?php echo get_the_date(); ?></p>
                        <p>Posted by: <?php the_author('F j, Y'); ?></p>
                        <p><?php the_time(); ?></p>
                        <p class="card-text"><?php the_excerpt(); ?></p>
