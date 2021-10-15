@@ -46,3 +46,7 @@ body {
   height: 15vh;
   object-fit: cover;
 }
+
+#logo {
+  width:200px;
+}

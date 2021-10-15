@@ -13,6 +13,25 @@
             <div class="col">
                  <div class="card mb-3" style="width: 100%">
                    <div class="card-body">
+                     <p>
+                       <?php
+                       $review_stars = get_post_meta(get_the_ID(), 'review_radio_field', true);
+                       if($review_stars =="1"){
+                         echo '<i class="bi bi-star-fill"></i><i class="bi bi-star"></i><i class="bi bi-star"></i>';
+                       }elseif ($review_stars =="2"){
+                         echo '<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i>';
+                       }else {
+                         echo '<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>';
+                       };
+                       ?>
+                     </p>
+                     <p><b>
+                       <?php
+                       $fruit_blurb = get_post_meta(get_the_ID(), 'blurb_input', true);
+                       echo $fruit_blurb;
+                     ?>
+                   </b></p>
+
                      <p class="card-text"><?php the_content() ?></p>
                    </div>
                  </div>
@@ -23,6 +42,7 @@
             else : echo '<p>There are no posts!</p>';
         endif;
         ?>
+        <a href="<?php echo get_page_link(get_page_by_path('fruit-collection')); ?>">Back to the fruit collection</a>
         <!-- <p>This is the single-fruit template</p> -->
 </body>
 
