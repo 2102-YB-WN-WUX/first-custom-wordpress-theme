@@ -80,6 +80,7 @@ function fruit_metabox_callback($post){
   $blurb_data = get_post_meta($post->ID, 'blurb_input', true);
   $price_data = get_post_meta($post->ID, 'price_input', true);
   $review_data = get_post_meta($post->ID, 'review_radio_field', true);
+  $textarea_data = get_post_meta($post->ID, 'textarea_field', true);
       // blurb
   echo '<label for "blurb">Blurb</label>' .
        '<input text="text" id="blurb_input" class="metabox_input" name="blurb_input" value="'. $blurb_data .'" size="50">';
@@ -97,6 +98,12 @@ function fruit_metabox_callback($post){
               echo "checked";} ?>>Two Stars</label>
             <label><input type="radio" name="review_radio_field" value="3" <?php if($review_data == "3"){
               echo "checked";} ?>>Three Stars</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="label">Textarea</div>
+          <div class="fields">
+              <textarea rows="5" name="textarea_field" rows="4" cols="50"><?php echo $textarea_data; ?></textarea>
           </div>
         </div>
 <?php
@@ -135,9 +142,43 @@ function fruit_save_metabox_data($post_id, $post){
   }else {
     delete_post_meta($post_id, 'review_radio_field');
   }
+  if(isset($_POST['textarea_field'])){
+    update_post_meta($post_id, 'textarea_field', sanitize_text_field($_POST['textarea_field']));
+  }else {
+    delete_post_meta($post_id, 'textarea_field');
+  }
   return $post_id;
 }
 
 add_action('save_post', 'fruit_save_metabox_data', 10, 2);
+
+// setting up custom taxonomies (or categories) for our custom post type sports
+
+function create_sports_taxonomy() {
+  $labels = array(
+    'name' => 'Custom Attributes',
+    'singular_name' => 'Attribute',
+    'search_items' => 'Search Attributes',
+    'all_items' => 'All Attributes',
+    'parent_item' => 'Parent Attribute',
+    'parent_item_colon' => 'Parent Attribute:',
+    'edit_item' => 'Edit Attribute',
+    'update_item' => 'Update Attribute',
+    'add_new_item' => 'Add New Attribute',
+    'new_item_name' => 'New Attribute Name',
+    'menu_name' => 'Attribute'
+  );
+  // register the taxonomy
+  register_taxonomy(
+    'attribute', array('sports'), array(
+      'hierarchical' => true,
+      'labels' => $labels,
+      'show_ui' => true
+    )
+  );
+}
+
+// hook in our action to set up our custom taxonomy
+add_action('init','create_sports_taxonomy', 0);
 
 ?>
