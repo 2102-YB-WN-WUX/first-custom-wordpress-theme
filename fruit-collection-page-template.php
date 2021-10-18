@@ -37,7 +37,9 @@ Template Name: Fruit Collection Page Template
                        <?php the_title() ?>
                        </a>
                      </h5>
-                     <span class="badge badge-primary">Featured!</span>
+                     <div class="alert alert-primary" role="alert">
+  Featured!
+</div>
                      <p>Posted: <?php the_date('F j, Y'); ?></p>
                      <p>Posted by: <?php the_author('F j, Y'); ?></p>
                      <p><?php the_time(); ?></p>
