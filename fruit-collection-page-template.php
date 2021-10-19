@@ -38,8 +38,9 @@ Template Name: Fruit Collection Page Template
                        </a>
                      </h5>
                      <div class="alert alert-primary" role="alert">
-  Featured!
-</div>
+                      Featured!
+                    </div>Color:
+                    <?php echo get_the_term_list($post->ID, 'color', '<div class="custom-class">', ' ', '</div>'); ?>
                      <p>Posted: <?php the_date('F j, Y'); ?></p>
                      <p>Posted by: <?php the_author('F j, Y'); ?></p>
                      <p><?php the_time(); ?></p>
@@ -62,7 +63,8 @@ Template Name: Fruit Collection Page Template
                      <a href="<?php the_permalink(); ?>">
                      <?php the_title() ?>
                      </a>
-                   </h5>
+                   </h5>Color:
+                   <?php echo get_the_term_list($post->ID, 'color', '<div class="custom-class">', ' ', '</div>'); ?>
                    <p>Posted: <?php the_date('F j, Y'); ?></p>
                    <p>Posted by: <?php the_author('F j, Y'); ?></p>
                    <p><?php the_time(); ?></p>

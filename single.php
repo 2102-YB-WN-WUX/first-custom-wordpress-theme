@@ -22,7 +22,7 @@
             else : echo '<p>There are no posts!</p>';
         endif;
         ?>
-        <!-- <p>This is the index template</p> -->
+        <p>This is the single.php template</p>
 </body>
 
 <?php get_footer(); ?>

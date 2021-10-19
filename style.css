@@ -28,7 +28,7 @@ body {
   background-color:#CAB8FF!important;
 }
 
-#menu-main-menu li a {
+#menu-menu-1 li a {
   margin-right:10px;
   color: black;
   border-radius:5px;
@@ -36,7 +36,7 @@ body {
   padding:3px 5px;
   text-decoration: none;
 }
-#menu-main-menu li a:hover{
+#menu-menu-1 li a:hover{
   background:black;
   color:#CAB8FF;
 }

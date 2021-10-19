@@ -2,6 +2,7 @@
 
 // turn on theme support
 add_theme_support('post-thumbnails');
+add_theme_support('woocommerce');
 
 function custom_theme_assets() {
   wp_enqueue_style('my-custom-style', get_stylesheet_uri());
@@ -180,5 +181,52 @@ function create_sports_taxonomy() {
 
 // hook in our action to set up our custom taxonomy
 add_action('init','create_sports_taxonomy', 0);
+
+
+// setting up custom taxonomies (or categories) for our custom post type sports
+
+function create_fruit_taxonomy() {
+  $labels = array(
+    'name' => 'Color',
+    'singular_name' => 'Color',
+    'search_items' => 'Search Colors',
+    'all_items' => 'All Colors',
+    'parent_item' => 'Parent Color',
+    'parent_item_colon' => 'Parent Color:',
+    'edit_item' => 'Edit Color',
+    'update_item' => 'Update Color',
+    'add_new_item' => 'Add New Color',
+    'new_item_name' => 'New Color Name',
+    'menu_name' => 'Color'
+  );
+  // register the taxonomy
+  register_taxonomy(
+    'color', array('fruit'), array(
+      'hierarchical' => true,
+      'labels' => $labels,
+      'show_ui' => true
+    )
+  );
+}
+
+// hook in our action to set up our custom taxonomy
+add_action('init','create_fruit_taxonomy', 0);
+
+// woocommerce customise the checkout fields
+add_filter('woocommerce_checkout_fields', 'custom_placeholder');
+
+function custom_placeholder($fields) {
+  $fields['order']['order_comments']['placeholder'] = "A new placeholder";
+    $fields['order']['order_comments']['label'] = "Delivery instructions";
+  return $fields;
+}
+
+// make phone and email fields unrequired
+add_filter( 'woocommerce_billing_fields', 'phone_email_custom');
+function phone_email_custom($fields){
+   $fields['billing_phone']['required'] = false;
+   $fields['billing_email']['required'] = false;
+   return $fields;
+}
 
 ?>
