@@ -2,14 +2,14 @@
   <div class="container fluid mt-5 mb-5">
      <div class="row">
        <div class="col-12">
-        <h3>Showing all posts Test</h3>
+        <h3><?php echo get_theme_mod("my_frontpage_message"); ?></h3>
       </div>
         <?php
         if (have_posts() ) :
             while (have_posts() ) : the_post(); ?>
 
             <!-- here's the area where it loops over each post -->
-            <div class="col col-md-4">
+            <div class="col <?php echo "col-md-" . get_theme_mod("my_custom_col_size"); ?>">
                  <div class="card mb-3" style="width: 100%">
                    <div class="card-body">
                      <h5 class="card-title">
@@ -126,7 +126,9 @@
   </div>
 </div>
 <img src="<?php bloginfo('stylesheet_directory');?>/images/shark.jpg" alt="happy shark" />
+<?php echo do_shortcode('[contact-form-7 id="34" title="Contact form 1"]'); ?>
         <!-- <p>This is front-page.php</p> -->
+<?php echo get_theme_mod("my_custom_message"); ?>
 </body>
 
 <?php get_footer(); ?>

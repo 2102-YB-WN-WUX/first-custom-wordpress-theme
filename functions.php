@@ -21,7 +21,8 @@ register_nav_menus(['primary'=> 'Tims Primary Menu']);
 
 // customise the excerpt length
 function new_excerpt_length() {
-  return 20;
+  $new_length = get_theme_mod("custom_excerpt_length");
+  return $new_length;
 }
 
 // use a filter hook to modify Wordpress function at runtime
@@ -228,5 +229,93 @@ function phone_email_custom($fields){
    $fields['billing_email']['required'] = false;
    return $fields;
 }
+
+// add a custom section to your theme customiser
+function my_first_customise_option($wp_customize) {
+  $wp_customize->add_section("tims_section", array(
+    "title" => "My first section", "custom_setting",
+    "priority" => 0
+  ));
+
+  // add a new setting
+  $wp_customize->add_setting("my_custom_message", array(
+    "default" => ""
+  ));
+  // add a new setting
+  $wp_customize->add_setting("my_frontpage_message", array(
+    "default" => ""
+  ));
+  // add a new number setting
+  $wp_customize->add_setting("my_custom_number", array(
+    "default" => 0
+  ));
+    // add a new number setting for custom excerpts
+  $wp_customize->add_setting("custom_excerpt_length", array(
+    "default" => 5
+  ));
+  // add a new control
+  $wp_customize->add_control("my_custom_message", array(
+    "label" => "Enter a custom message",
+    "section" => "tims_section",
+    "settings" => "my_custom_message",
+    "type" => "textarea"
+  ));
+  $wp_customize->add_control("my_frontpage_message", array(
+    "label" => "Enter a front page message",
+    "section" => "tims_section",
+    "settings" => "my_frontpage_message",
+    "type" => "textarea"
+  ));
+  // heres the control for our new number
+  $wp_customize->add_control("my_custom_number", array(
+    "label" => "Enter a number",
+    "section" => "tims_section",
+    "settings" => "my_custom_number",
+    "type" => "number",
+    'input_attrs' => array(
+      'min' => 0,
+      'max' => 12
+    )
+  ));
+  $wp_customize->add_control("custom_excerpt_length", array(
+    "label" => "Excerpt length",
+    "section" => "tims_section",
+    "settings" => "custom_excerpt_length",
+    "type" => "number",
+    'input_attrs' => array(
+      'min' => 5,
+      'max' => 50
+    )
+  ));
+}
+
+add_action("customize_register", "my_first_customise_option");
+
+// add a custom section to your theme customiser
+function bootstrap_changes($wp_customize) {
+  $wp_customize->add_section("bootstrap_section", array(
+    "title" => "Bootstrap settings", "custom_setting2",
+    "priority" => 0
+  ));
+
+  // add a new number setting
+  $wp_customize->add_setting("my_custom_col_size", array(
+    "default" => 4
+  ));
+
+  // heres the control for our new number
+  $wp_customize->add_control("my_custom_col_size", array(
+    "label" => "Enter a number",
+    "section" => "bootstrap_section",
+    "settings" => "my_custom_col_size",
+    "type" => "number",
+    'input_attrs' => array(
+      'min' => 6,
+      'max' => 12
+    )
+  ));
+}
+
+add_action("customize_register", "bootstrap_changes");
 
 ?>
