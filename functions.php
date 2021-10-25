@@ -233,7 +233,7 @@ function phone_email_custom($fields){
 // add a custom section to your theme customiser
 function my_first_customise_option($wp_customize) {
   $wp_customize->add_section("tims_section", array(
-    "title" => "My first section", "custom_setting",
+    "title" => "My first section",
     "priority" => 0
   ));
 
@@ -294,7 +294,7 @@ add_action("customize_register", "my_first_customise_option");
 // add a custom section to your theme customiser
 function bootstrap_changes($wp_customize) {
   $wp_customize->add_section("bootstrap_section", array(
-    "title" => "Bootstrap settings", "custom_setting2",
+    "title" => "Bootstrap settings",
     "priority" => 0
   ));
 
