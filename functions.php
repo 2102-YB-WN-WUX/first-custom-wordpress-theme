@@ -264,6 +264,38 @@ function my_first_customise_option($wp_customize) {
     "default" => ""
   ));
 
+  // add a new dropdown select setting
+  $wp_customize->add_setting("my_custom_select", array(
+    "default" => "show_posts"
+  ));
+
+  $wp_customize->add_control("my_custom_select", array(
+    "label" => "Show the latest posts on the front page",
+    "section" => "tims_section",
+    "settings" => "my_custom_select",
+    "type" => "select",
+    "choices" => array(
+      "show_posts" => 'Yes',
+      "hide_posts" => 'No'
+    )
+  ));
+  // add a new dropdown select setting
+  $wp_customize->add_setting("my_custom_select2", array(
+    "default" => "show_related"
+  ));
+
+  $wp_customize->add_control("my_custom_select2", array(
+    "label" => "Show Woocommerce related products",
+    "section" => "tims_section",
+    "settings" => "my_custom_select2",
+    "type" => "select",
+    "choices" => array(
+      "show_related" => 'Yes',
+      "hide_related" => 'No'
+
+    )
+  ));
+
   $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'color_picker', array(
       'label' => 'Link Colors',
       'section' => 'tims_section',

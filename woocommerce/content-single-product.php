@@ -70,7 +70,10 @@ if ( post_password_required() ) {
 	 * @hooked woocommerce_upsell_display - 15
 	 * @hooked woocommerce_output_related_products - 20
 	 */
-	remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
+	//
+	if (get_theme_mod('my_custom_select2') == 'hide_related'){
+		remove_action('woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
+	}
 	do_action( 'woocommerce_after_single_product_summary' );
 	?>
 </div>
