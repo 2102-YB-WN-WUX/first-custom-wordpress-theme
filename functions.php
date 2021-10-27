@@ -253,6 +253,33 @@ function my_first_customise_option($wp_customize) {
   $wp_customize->add_setting("custom_excerpt_length", array(
     "default" => 5
   ));
+
+  // add a new color picker setting
+  $wp_customize->add_setting("color_picker", array(
+    "default" => ""
+  ));
+
+  // add a new image upload setting
+  $wp_customize->add_setting("custom_image", array(
+    "default" => ""
+  ));
+
+  $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'color_picker', array(
+      'label' => 'Link Colors',
+      'section' => 'tims_section',
+      'settings' => 'color_picker'
+    )));
+
+  // add our custom image control
+  $wp_customize->add_control(new WP_Customize_Image_Control(
+    $wp_customize, 'custom_image', array(
+        'label' => 'Upload a custom image',
+        'settings' => 'custom_image',
+        'section' => 'tims_section',
+        'priority' => 1000
+    ))
+  );
+
   // add a new control
   $wp_customize->add_control("my_custom_message", array(
     "label" => "Enter a custom message",
@@ -317,5 +344,19 @@ function bootstrap_changes($wp_customize) {
 }
 
 add_action("customize_register", "bootstrap_changes");
+
+function generate_special_css() {
+  $color_picker = get_theme_mod('color_picker');
+  ?>
+  <style type="text/css">
+    .card-title a {
+      color: <?php echo $color_picker; ?>
+    }
+
+  </style>
+  <?php
+}
+
+add_action('wp_head','generate_special_css');
 
 ?>
